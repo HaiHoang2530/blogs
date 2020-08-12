@@ -34,6 +34,7 @@ const styleSignUp = StyleSheet.create ({
     marginTop: 32,
     justifyContent: 'center',
     alignItems: 'center',
+    borderRadius:20
   },
 });
 export {styleSignUp};

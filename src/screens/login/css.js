@@ -30,10 +30,11 @@ const styleLogin = StyleSheet.create ({
   },
   touchOpacity: {
     backgroundColor: Colors.green,
-    height: 30,
+    height: 40,
     marginTop: 32,
     justifyContent: 'center',
     alignItems: 'center',
+    borderRadius:20,
   },
 });
 export {styleLogin};

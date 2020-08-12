@@ -28,17 +28,17 @@ export default function SingUp({navigation}) {
     } else {
       Firebase.auth ()
         .createUserWithEmailAndPassword (email, password)
-        .then (() => {
-          Firebase.database ().ref ('Users').child (name).set ({
-            name: name,
-            email: email,
-            password: password,
-          });
+        .then (userData => {
+          userData.user.updateProfile ({displayName: name});
+          setName ('');
+          setEmail ('');
+          setPassword ('');
+          setRefPassword ('');
+          navigation.navigate ('login');
         })
         .catch (function (error) {
-          console.log (error);
+          alert ('Tai khoan da dung dang ky!');
         });
-      navigation.navigate ('login');
     }
   };
   return (

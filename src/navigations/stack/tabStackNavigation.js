@@ -1,6 +1,5 @@
 import React from 'react';
 import {WelCome, Login, SignUp, Content} from '../../screens';
-
 import {createStackNavigator} from '@react-navigation/stack';
 import TabBottomMater from '../bottom/tabBottom';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';

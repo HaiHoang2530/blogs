@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -10,20 +10,25 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import {styleLogin} from './css';
-import {Firebase} from '../../firebase'
+import {Firebase} from '../../firebase';
 export default function Login({navigation}) {
-  const [email,setEmail] = useState('');
-  const [password,setPassword] = useState('');
-
-  const HandleLogin = () =>{
-   if(email.trim()==""&& password.trim()==""){
-    alert('vui long nhap email!');
-   }else{
-    Firebase.auth().signInWithEmailAndPassword(email,password)
-    .then(()=>navigation.navigate('tabbottom',email))
-    .catch(err =>console.log(err))
-   }
-  }
+  const [email, setEmail] = useState ('');
+  const [password, setPassword] = useState ('');
+  const HandleLogin = () => {
+    if (email.trim () == '' && password.trim () == '') {
+      alert ('vui long nhap email!');
+    } else {
+      Firebase.auth ()
+        .signInWithEmailAndPassword (email, password)
+        .then (users => {
+          const name = users.user.displayName;
+          setEmail ('');
+          setPassword ('');
+          navigation.navigate ('tabbottom', name);
+        })
+        .catch (err => console.log (err));
+    }
+  };
   return (
     <KeyboardAvoidingView
       style={styleLogin.container}
@@ -43,7 +48,7 @@ export default function Login({navigation}) {
               style={styleLogin.textInput}
               placeholderTextColor="#808080"
               value={email}
-              onChangeText={text => setEmail(text)}
+              onChangeText={text => setEmail (text)}
             />
             <TextInput
               placeholder="password"
@@ -52,11 +57,11 @@ export default function Login({navigation}) {
               placeholderTextColor="#808080"
               secureTextEntry={true}
               value={password}
-              onChangeText={text => setPassword(text)}
+              onChangeText={text => setPassword (text)}
             />
             <TouchableOpacity
               style={styleLogin.touchOpacity}
-              onPress={() => HandleLogin()}
+              onPress={() => HandleLogin ()}
             >
               <Text>Sign In</Text>
             </TouchableOpacity>
