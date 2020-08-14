@@ -10,24 +10,25 @@ import {
 import {useRoute} from '@react-navigation/native';
 import {Firebase} from '../../firebase';
 
-export default function Content ({navigation}) {
+export default function Content({navigation}) {
   const route = useRoute ();
   const [content, setContent] = useState ('');
   const name = route.params;
-
   const AddContent = () => {
     if (content.trim () === '') {
       alert ('vui long nhap content');
     } else {
-      Firebase.database ()
-        .ref ('Contentss')
-        .push ({
-          name: name,
-          content: content,
-        })
-        .catch (err => console.log (err));
+      const ref = Firebase.database ().ref ('Contentss');
+      const porstRef = ref.child('Post');
+      const newPostRef = porstRef.push();
+      const postID = newPostRef.key;
+      newPostRef.set({
+       postID:postID,
+       name:name,
+       content:content,
+      });
     }
-    navigation.navigate('tabbottom');
+    navigation.navigate ('tabbottom');
     setContent ('');
   };
   return (

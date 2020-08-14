@@ -3,26 +3,40 @@ import {View, Text, FlatList, StyleSheet} from 'react-native';
 import Item from './item';
 import {Firebase} from '../../firebase';
 
-export default function Home () {
+export default function Home({navigation}) {
+
   const [list, setList] = useState ();
   useEffect (() => {
-     GetListContent ();
-  },[]);
+    GetListContent ();
+  });
   const GetListContent = () => {
-    Firebase.database ().ref ('Contentss').on ('value', result => {
-      const list = result.val ();
-      const items = Object.values (list);
-      console.log ('item:' + JSON.stringify (items));
-      setList (items.reverse());
-    });
+    Firebase.database ()
+      .ref ('Contentss')
+      .child ('Post')
+      .once ('value', value => {
+        const values = value.val ();
+        const objects = Object.values (values);
+        setList (objects.reverse ());
+      });
   };
-  return <FlatList 
-  data={list}
-  renderItem={({item})=><Item
-  item={item}
-  />}
-  keyExtractor={(item)=>item.id}
-  />;
+  const HandleComment = itemId => {
+    Firebase.database ()
+      .ref ('Contentss')
+      .child (`Post/${itemId}`)
+      .once ('value', value => {
+        const values = value.val ();
+        navigation.navigate ('comment', values);
+      });
+  };
+  return (
+    <FlatList
+      data={list}
+      renderItem={({item}) => (
+        <Item item={item} HandleComment={HandleComment} />
+      )}
+      keyExtractor={item => item.id}
+    />
+  );
 }
 const styleHome = StyleSheet.create ({
   container: {

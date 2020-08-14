@@ -3,7 +3,6 @@ import {
   createMaterialBottomTabNavigator,
 } from '@react-navigation/material-bottom-tabs';
 import {Home, Friend, Profile} from '../../screens';
-
 const TabBottomMater = createMaterialBottomTabNavigator ();
 
 export default function TabBottom () {

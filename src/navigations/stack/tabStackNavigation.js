@@ -1,5 +1,5 @@
 import React from 'react';
-import {WelCome, Login, SignUp, Content} from '../../screens';
+import {WelCome, Login, SignUp, Content,Comment} from '../../screens';
 import {createStackNavigator} from '@react-navigation/stack';
 import TabBottomMater from '../bottom/tabBottom';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
@@ -52,6 +52,7 @@ export default function TabStackNavigation () {
         }}
       />
       <TabStack.Screen name="content" component={Content} />
+      <TabStack.Screen name="comment" component={Comment} />
     </TabStack.Navigator>
   );
 }
