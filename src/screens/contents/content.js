@@ -26,6 +26,7 @@ export default function Content({navigation}) {
        postID:postID,
        name:name,
        content:content,
+       comments:'',
       });
     }
     navigation.navigate ('tabbottom');
