@@ -26,7 +26,6 @@ export default function Home({navigation}) {
       .child (`Post/${itemId}`)
       .once ('value', value => {
         const values = value.val ();
-        console.log(values)
         navigation.navigate ('comment', values);
       });
   };

@@ -19,14 +19,14 @@ export default function Content({navigation}) {
       alert ('vui long nhap content');
     } else {
       const ref = Firebase.database ().ref ('Contentss');
-      const porstRef = ref.child('Post');
-      const newPostRef = porstRef.push();
+      const porstRef = ref.child ('Post');
+      const newPostRef = porstRef.push ();
       const postID = newPostRef.key;
-      newPostRef.set({
-       postID:postID,
-       name:name,
-       content:content,
-       comments:'',
+      newPostRef.set ({
+        postID: postID,
+        name: name,
+        content: content,
+        comments: '',
       });
     }
     navigation.navigate ('tabbottom');
@@ -97,7 +97,7 @@ const styContent = StyleSheet.create ({
     borderWidth: 1,
     borderColor: '#808080',
     color: '#fff',
-    fontSize:20
+    fontSize: 20,
   },
   touch: {
     height: 30,
@@ -109,12 +109,12 @@ const styContent = StyleSheet.create ({
   },
   text: {
     color: '#1b262c',
-    fontWeight:'bold',
-    fontSize:20
+    fontWeight: 'bold',
+    fontSize: 20,
   },
-  textName:{
-    color:"#01D475",
-    fontSize:24,
-    fontWeight:'bold'
-  }
+  textName: {
+    color: '#01D475',
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
 });

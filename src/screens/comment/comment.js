@@ -25,7 +25,7 @@ export default function Comment () {
   const route = useRoute ();
   const HandleComment = () => {
     if (send === '') {
-      console.log ('nhap');
+      alert ('nhap comment!');
     } else {
       const newPush = Firebase.database ()
         .ref ('Contentss')
@@ -49,10 +49,6 @@ export default function Comment () {
       const obj = Object.values (values);
       setComment (obj.reverse ());
     });
-
-    // const values = value.val ();
-    // const obj = Object.values (values);
-    // setComment (obj.reverse ());
   };
   return (
     <View style={styComment.container}>
