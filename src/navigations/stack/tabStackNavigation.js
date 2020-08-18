@@ -76,6 +76,8 @@ const styHeader = StyleSheet.create ({
     color: '#ffffff',
     marginLeft: 10,
     width:200,
+    fontWeight:'bold',
+    fontSize:20
   },
   push: {
     marginLeft: 80,

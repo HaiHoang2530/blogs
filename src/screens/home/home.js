@@ -2,13 +2,11 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, FlatList, StyleSheet} from 'react-native';
 import Item from './item';
 import {Firebase} from '../../firebase';
-
 export default function Home({navigation}) {
-
   const [list, setList] = useState ();
   useEffect (() => {
     GetListContent ();
-  });
+  },[list]);
   const GetListContent = () => {
     Firebase.database ()
       .ref ('Contentss')
@@ -19,7 +17,7 @@ export default function Home({navigation}) {
         setList (objects.reverse ());
       });
   };
-  const HandleComment = itemId => {
+  const HandleComment = (itemId) => {
     Firebase.database ()
       .ref ('Contentss')
       .child (`Post/${itemId}`)

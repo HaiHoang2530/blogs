@@ -14,24 +14,29 @@ import Item from './item';
 export default function Comment () {
   const [send, setSend] = useState ();
   const [comment ,setComment]= useState();
+  const [userName,setUserName] = useState();
   useEffect (() => {
     HandleShowComment();
-  }, []);
+    getUserName();
+  }, [send]);
   const route = useRoute ();
   const HandleComment = () => {
-    const newPush = Firebase.database ()
+    if(send === ''){
+      console.log('nhap');
+    }
+    else{
+      const newPush = Firebase.database ()
       .ref ('Contentss')
       .child (`Post/${route.params.postID}`);
-    newPush.child ('comments').push ({comment: send});
-    // newPush.child('comments').once('value',value=>{
-    //   const values = value.val();
-    //   const obj = Object.values(values);
-    //   setComment(obj);
-    //   console.log('value:'+JSON.stringify(obj))
-    // })
-    HandleShowComment();
+    newPush.child ('comments').push ({comment: send,user:userName});
+    }
     setSend ('');
   };
+  const getUserName = () =>{
+    Firebase.auth().onAuthStateChanged((user)=>{
+      setUserName(user.displayName);
+    })
+  }
   const HandleShowComment = () =>{
     const newPush = Firebase.database ()
       .ref ('Contentss')
@@ -40,7 +45,7 @@ export default function Comment () {
         const values = value.val();
         const obj = Object.values(values);
         setComment(obj.reverse());
-        console.log('value:'+JSON.stringify(obj))
+        
       })
   }
   return (
@@ -69,7 +74,7 @@ export default function Comment () {
             style={styComment.img}
             onPress={() => HandleComment ()}
           >
-            <Image source={require ('../../assets/images/play.png')} />
+            <Image source={require ('../../assets/images/playbliue.png')} />
           </TouchableOpacity>
         </View>
       </View>

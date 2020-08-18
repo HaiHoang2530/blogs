@@ -39,7 +39,7 @@ export default function Content({navigation}) {
             source={require ('../../assets/images/person.png')}
             style={styContent.image}
           />
-          <Text style={{color: '#01D475'}}>{route.params}</Text>
+          <Text style={styContent.textName}>{route.params}</Text>
         </View>
         <View style={styContent.viewTT}>
           <View style={{flex: 1}}>
@@ -90,12 +90,13 @@ const styContent = StyleSheet.create ({
   },
   container: {
     flex: 1,
-    backgroundColor: '#050405',
+    backgroundColor: '#1b262c',
   },
   textInputC: {
     borderWidth: 1,
     borderColor: '#808080',
     color: '#fff',
+    fontSize:20
   },
   touch: {
     height: 30,
@@ -106,6 +107,13 @@ const styContent = StyleSheet.create ({
     marginTop: 32,
   },
   text: {
-    color: '#fff',
+    color: '#1b262c',
+    fontWeight:'bold',
+    fontSize:20
   },
+  textName:{
+    color:"#01D475",
+    fontSize:24,
+    fontWeight:'bold'
+  }
 });

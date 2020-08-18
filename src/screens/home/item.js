@@ -8,7 +8,6 @@ export default function Item({item, HandleComment}) {
         <Text style={styleItem.textname}>{item.name}</Text>
       </View>
       <View style={styleItem.view2}>
-        <Text>key:{item.postID}</Text>
         <Text style={styleItem.touchab}>{item.content}</Text>
       </View>
       <TouchableOpacity
@@ -29,7 +28,7 @@ const styleItem = StyleSheet.create ({
   },
   view1: {
     flex: 1,
-    backgroundColor: '#808080',
+    backgroundColor: '#bbe1fa',
     justifyContent: 'center',
     alignItems: 'center',
     borderTopLeftRadius: 20,
@@ -37,21 +36,28 @@ const styleItem = StyleSheet.create ({
   },
   view2: {
     flex: 4,
-    backgroundColor: '#01D475',
+    backgroundColor: '#0f4c75',
   },
   textname: {
-    height: 40,
-    fontSize: 30,
+   
+    fontSize: 24,
+    fontWeight:'bold',
+    color:'#000'
   },
   buttonTT: {
     height: 40,
-    backgroundColor: '#fff',
+    backgroundColor: '#808080',
     justifyContent: 'center',
     alignItems: 'center',
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
   },
   textTT: {
-    fontSize: 20,
+    fontSize: 24,
   },
+  touchab:{
+    fontSize:20,
+    marginLeft:8
+  }
+
 });
