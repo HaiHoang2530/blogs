@@ -1,9 +1,10 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
 
-export default function Item({item, HandleComment}) {
+export default function Item({item, HandleComment,HandleModal}) {
   return (
-    <View style={styleItem.container}>
+    <TouchableOpacity onPress={()=>HandleComment(item.postID)}>
+       <View style={styleItem.container}>
       <View style={styleItem.view1}>
         <Text style={styleItem.textname}>{item.name}</Text>
       </View>
@@ -18,6 +19,7 @@ export default function Item({item, HandleComment}) {
       </TouchableOpacity>
 
     </View>
+    </TouchableOpacity>
   );
 }
 const styleItem = StyleSheet.create ({

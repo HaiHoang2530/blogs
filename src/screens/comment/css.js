@@ -11,12 +11,12 @@ const styComment = StyleSheet.create ({
   },
   comment: {
     flex: 2,
-    backgroundColor:"#32e0c4",
+    backgroundColor: '#32e0c4',
   },
   play: {
     height: 50,
     width: '100%',
-    backgroundColor: "#222831",
+    backgroundColor: '#222831',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -36,11 +36,52 @@ const styComment = StyleSheet.create ({
     fontSize: 24,
     marginLeft: 10,
     marginBottom: 10,
-    fontWeight:'bold',
+    fontWeight: 'bold',
   },
   conten: {
     marginLeft: 10,
-    fontSize:20,
+    fontSize: 20,
+  },
+  headerModal: {
+    height: 50,
+    flexDirection: 'row',
+    margin: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#000',
+  },
+  textModal: {
+    marginLeft: 120,
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  commentreply:{
+    height:100,
+    margin:16,
+    backgroundColor:"#c8d5b9",
+    borderRadius:20
+  },
+  play1: {
+    height: 50,
+    width: '100%',
+    backgroundColor: '#222831',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  styleReply: {
+    height:80,
+    borderRadius: 20,
+    backgroundColor: '#c8d5b9',
+    margin: 8,
+    paddingLeft: 20,
+    paddingTop: 5,
+  },
+  texrNameheader: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  textCommentheader: {
+    fontSize: 20,
   },
 });
 

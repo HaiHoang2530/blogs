@@ -9,7 +9,6 @@ const TabBottomMater = createMaterialBottomTabNavigator ();
 export default function TabBottom () {
   const route = useRoute ();
   const userName = route.params;
-  console.log('rrrr:'+ userName);
   return (
     <TabBottomMater.Navigator
     initialRouteName="home"
