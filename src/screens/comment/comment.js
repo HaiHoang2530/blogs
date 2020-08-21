@@ -1,4 +1,4 @@
-import React, {useEffect, useState, Children} from 'react';
+import React, {useEffect, useState, createRef, useRef} from 'react';
 import {
   View,
   Text,
@@ -9,12 +9,14 @@ import {
   Modal,
   StyleSheet,
   ScrollView,
+  RefreshControl,
 } from 'react-native';
 import {styComment} from './css';
 import {useRoute} from '@react-navigation/native';
 import {Firebase} from '../../firebase';
 import Item from './item';
 import ItemReply from './itemReply';
+import {Button} from 'react-native-paper';
 export default function Comment () {
   const [send, setSend] = useState ();
   const [comment, setComment] = useState ();
@@ -30,7 +32,6 @@ export default function Comment () {
     () => {
       HandleShowComment ();
       getUserName ();
-      //HandleShowReply();
     },
     [comment]
   );
@@ -42,9 +43,6 @@ export default function Comment () {
       const newPush = Firebase.database ()
         .ref ('Contentss')
         .child (`Post/${route.params.postID}`);
-      // newPush
-      //   .child ('comments')
-      //   .push ({comment: send, user: userName, reply: '', like: ''});
       const push = newPush.child ('comments').push ();
       const keypush = push.key;
       push.set ({
@@ -85,14 +83,8 @@ export default function Comment () {
       setReply (values.user);
       setCommentReply (values.comment);
       setKeyID (values.keyID);
-      // value.ref.child ('reply').once ('value', res => {
-      //   const values = res.val ();
-      //   const obj = Object.values (values);
-      //   setShowReply (obj.reverse ());
-      // });
-      //HandleShowReply(values.keyID);
     });
-    HandleShowReply(id);
+    HandleShowReply (id);
   };
   const HandleLike = id => {
     const refData = Firebase.database ()
@@ -123,19 +115,21 @@ export default function Comment () {
       user: userName,
     });
     setTextReply ('');
-    HandleShowReply(keyID)
+    HandleShowReply (keyID);
   };
-  const HandleShowReply = (keyID) => {
+  const HandleShowReply = keyID => {
     const ref = Firebase.database ()
       .ref ('Contentss')
       .child (`Post/${route.params.postID}`)
       .child (`comments/${keyID}`);
-      ref.child('reply').once('value',value=>{
-        const values = value.val ();
-        const obj = Object.values (values);
-        setShowReply (obj.reverse ());
-      })
+    ref.child ('reply').once ('value', value => {
+      const values = value.val ();
+      const obj = Object.values (values);
+      console.log (obj);
+      setShowReply (obj.reverse ());
+    });
   };
+
   return (
     <View style={styComment.container}>
       <View style={styComment.contens}>
@@ -150,6 +144,7 @@ export default function Comment () {
               item={item}
               HandleReply={HandleReply}
               HandleLike={HandleLike}
+              showReply={showReply}
             />
           )}
           keyExtractor={item => item.id}
@@ -176,7 +171,7 @@ export default function Comment () {
             <Text style={styComment.textModal}>Tra loi</Text>
           </View>
         </TouchableOpacity>
-        <View style={{height: '88%'}}>
+        <View style={{height: '80%'}}>
           <FlatList
             style={{height: '69%', backgroundColor: '#808080'}}
             ListHeaderComponent={HeaderReply}

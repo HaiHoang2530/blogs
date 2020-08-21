@@ -1,8 +1,39 @@
-import React,{useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import Color from '../../theme/color';
-import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Modal,
+  FlatList,
+} from 'react-native';
 
-export default function Item({item, HandleReply, HandleLike}) {
+export default function Item({item, HandleReply, HandleLike,showReply}) {
+  const data = [
+    {
+      name: 'haiahiashdisa',
+      age: 12,
+    },
+    {
+      name: 'haiaiashdisa',
+      age: 1,
+    },
+    {
+      name: 'haiahhdisa',
+      age: 11,
+    },
+    {
+      name: 'haiahhdisa',
+      age: 11,
+    },
+    {
+      name: 'haiahhdisa',
+      age: 11,
+    },
+  ];
+  const [show, setShow] = useState (false);
   return (
     <View style={styleItem.container}>
       <Text style={styleItem.texrName}>{item.user}</Text>
@@ -28,6 +59,35 @@ export default function Item({item, HandleReply, HandleLike}) {
           />
           <Text> reply</Text>
         </TouchableOpacity>
+      </View>
+      <TouchableOpacity
+        style={{height: 40, width: 40}}
+        onPress={() => {
+          if (show != true) {
+            setShow (true);
+          } else {
+            setShow (false);
+          }
+        }}
+      >
+        <Text style={{fontSize: 20,color:"blue"}}>xem</Text>
+      </TouchableOpacity>
+      <View>
+        <FlatList
+          showsVerticalScrollIndicator={show}
+          data={showReply}
+          renderItem={({item}) => {
+            if (show) {
+              return (
+                <View style={styleItem.xem}>
+                  <Text style={styleItem.texrName}>{item.user}</Text>
+                  <Text style={styleItem.textComment}>{item.text}</Text>
+                </View>
+              );
+            } else {
+            }
+          }}
+        />
       </View>
     </View>
   );
@@ -56,6 +116,12 @@ const styleItem = StyleSheet.create ({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 16,
-
   },
+  xem:{
+    borderRadius: 20,
+    backgroundColor: '#808080',
+    margin: 8,
+    paddingLeft: 20,
+    paddingTop: 5,
+  }
 });
