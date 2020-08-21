@@ -85,14 +85,14 @@ export default function Comment () {
       setReply (values.user);
       setCommentReply (values.comment);
       setKeyID (values.keyID);
-      value.ref.child ('reply').once ('value', res => {
-        const values = res.val ();
-        const obj = Object.values (values);
-        setShowReply (...obj.reverse ());
-      });
+      // value.ref.child ('reply').once ('value', res => {
+      //   const values = res.val ();
+      //   const obj = Object.values (values);
+      //   setShowReply (obj.reverse ());
+      // });
       //HandleShowReply(values.keyID);
     });
-    //HandleShowReply(id);
+    HandleShowReply(id);
   };
   const HandleLike = id => {
     const refData = Firebase.database ()
@@ -123,18 +123,19 @@ export default function Comment () {
       user: userName,
     });
     setTextReply ('');
+    HandleShowReply(keyID)
   };
-  // const HandleShowReply = (keyID) => {
-  //   const ref = Firebase.database ()
-  //     .ref ('Contentss')
-  //     .child (`Post/${route.params.postID}`)
-  //     .child (`comments/${keyID}`);
-  //     ref.child('reply').once('value',value=>{
-  //       const values = value.val ();
-  //       const obj = Object.values (values);
-  //       setShowReply (obj.reverse ());
-  //     })
-  // };
+  const HandleShowReply = (keyID) => {
+    const ref = Firebase.database ()
+      .ref ('Contentss')
+      .child (`Post/${route.params.postID}`)
+      .child (`comments/${keyID}`);
+      ref.child('reply').once('value',value=>{
+        const values = value.val ();
+        const obj = Object.values (values);
+        setShowReply (obj.reverse ());
+      })
+  };
   return (
     <View style={styComment.container}>
       <View style={styComment.contens}>
