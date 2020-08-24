@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -7,7 +7,7 @@ import {
   TextInput,
   StyleSheet,
 } from 'react-native';
-import {useRoute} from '@react-navigation/native';
+import {useRoute, useFocusEffect} from '@react-navigation/native';
 import {Firebase} from '../../firebase';
 
 export default function Content({navigation}) {
@@ -28,8 +28,8 @@ export default function Content({navigation}) {
         content: content,
         comments: '',
       });
+      navigation.navigate ('tabbottom');
     }
-    navigation.navigate ('tabbottom');
     setContent ('');
   };
   return (

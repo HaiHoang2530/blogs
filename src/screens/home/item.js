@@ -1,24 +1,18 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
 
-export default function Item({item, HandleComment,HandleModal}) {
+export default function Item({item, HandleComment, HandleModal}) {
   return (
-    <TouchableOpacity onPress={()=>HandleComment(item.postID)}>
-       <View style={styleItem.container}>
-      <View style={styleItem.view1}>
-        <Text style={styleItem.textname}>{item.name}</Text>
-      </View>
-      <View style={styleItem.view2}>
-        <Text style={styleItem.touchab}>{item.content}</Text>
-      </View>
-      <TouchableOpacity
-        style={styleItem.buttonTT}
-        onPress={() => HandleComment (item.postID)}
-      >
-        <Text style={styleItem.textTT}>Comment</Text>
-      </TouchableOpacity>
+    <TouchableOpacity onPress={() => HandleComment (item.postID)}>
+      <View style={styleItem.container}>
+        <View style={styleItem.view1}>
+          <Text style={styleItem.textname}>{item.name}</Text>
+        </View>
+        <View style={styleItem.view2}>
+          <Text style={styleItem.touchab}>{item.content}</Text>
+        </View>
 
-    </View>
+      </View>
     </TouchableOpacity>
   );
 }
@@ -41,10 +35,9 @@ const styleItem = StyleSheet.create ({
     backgroundColor: '#0f4c75',
   },
   textname: {
-   
     fontSize: 24,
-    fontWeight:'bold',
-    color:'#000'
+    fontWeight: 'bold',
+    color: '#000',
   },
   buttonTT: {
     height: 40,
@@ -57,9 +50,8 @@ const styleItem = StyleSheet.create ({
   textTT: {
     fontSize: 24,
   },
-  touchab:{
-    fontSize:20,
-    marginLeft:8
-  }
-
+  touchab: {
+    fontSize: 20,
+    marginLeft: 8,
+  },
 });

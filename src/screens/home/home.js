@@ -2,15 +2,18 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, FlatList, StyleSheet, Modal} from 'react-native';
 import Item from './item';
 import {Firebase} from '../../firebase';
+import {useFocusEffect} from '@react-navigation/native';
 export default function Home({navigation}) {
   const [list, setList] = useState ();
   const [modal, setModal] = useState (false);
-  useEffect (
-    () => {
+  useEffect (() => {
+    GetListContent ();
+    const unsub = navigation.addListener ('focus', () => {
       GetListContent ();
-    },
-    [list]
-  );
+    });
+    return unsub;
+  }, []);
+
   const GetListContent = () => {
     Firebase.database ()
       .ref ('Contentss')

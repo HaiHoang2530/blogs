@@ -4,8 +4,8 @@ import {View, Text, StyleSheet} from 'react-native';
 export default function ItemReply({item}) {
   return (
     <View style={styltItemReply.Container}>
-      <Text style={styltItemReply.texrName} >{item.user}</Text>
-  <Text style={styltItemReply.textComment} >{item.text}</Text>
+      <Text style={styltItemReply.texrName}>{item.user}</Text>
+      <Text style={styltItemReply.textComment}>{item.text}</Text>
     </View>
   );
 }

@@ -10,29 +10,19 @@ import {
   FlatList,
 } from 'react-native';
 
-export default function Item({item, HandleReply, HandleLike,showReply}) {
-  const data = [
-    {
-      name: 'haiahiashdisa',
-      age: 12,
-    },
-    {
-      name: 'haiaiashdisa',
-      age: 1,
-    },
-    {
-      name: 'haiahhdisa',
-      age: 11,
-    },
-    {
-      name: 'haiahhdisa',
-      age: 11,
-    },
-    {
-      name: 'haiahhdisa',
-      age: 11,
-    },
-  ];
+export default function Item({item, HandleReply, HandleLike}) {
+  // useEffect (() => {
+  //   if(item.reply == null){
+  //     setSee('')
+  //   }
+  //   else{
+  //     setSee (Object.values (item.reply));
+  //   }
+  // }, []);
+  // const HandleSee = () =>{
+
+  // }
+  // const [see, setSee] = useState ();
   const [show, setShow] = useState (false);
   return (
     <View style={styleItem.container}>
@@ -51,7 +41,7 @@ export default function Item({item, HandleReply, HandleLike,showReply}) {
         </TouchableOpacity>
         <TouchableOpacity
           style={styleItem.touchableReply}
-          onPress={() => HandleReply (item.keyID)}
+          onPress={() => HandleReply (item)}
         >
           <Image
             source={require ('../../assets/images/topic.png')}
@@ -70,12 +60,11 @@ export default function Item({item, HandleReply, HandleLike,showReply}) {
           }
         }}
       >
-        <Text style={{fontSize: 20,color:"blue"}}>xem</Text>
+        <Text style={{fontSize: 20, color: 'blue'}}>xem</Text>
       </TouchableOpacity>
       <View>
         <FlatList
-          showsVerticalScrollIndicator={show}
-          data={showReply}
+          data={Object.values (item.reply)}
           renderItem={({item}) => {
             if (show) {
               return (
@@ -87,6 +76,7 @@ export default function Item({item, HandleReply, HandleLike,showReply}) {
             } else {
             }
           }}
+          keyExtractor={(item2, index) => index}
         />
       </View>
     </View>
@@ -117,11 +107,11 @@ const styleItem = StyleSheet.create ({
     alignItems: 'center',
     marginBottom: 16,
   },
-  xem:{
+  xem: {
     borderRadius: 20,
     backgroundColor: '#808080',
     margin: 8,
     paddingLeft: 20,
     paddingTop: 5,
-  }
+  },
 });

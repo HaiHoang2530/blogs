@@ -27,14 +27,11 @@ export default function Comment () {
   const [commentReply, setCommentReply] = useState ();
   const [textReply, setTextReply] = useState ();
   const [showReply, setShowReply] = useState ();
-  const [number, setNumber] = useState ();
-  useEffect (
-    () => {
-      HandleShowComment ();
-      getUserName ();
-    },
-    [comment]
-  );
+  const [items, setItems] = useState ();
+  useEffect (() => {
+    HandleShowComment ();
+    getUserName ();
+  }, []);
   const route = useRoute ();
   const HandleComment = () => {
     if (send === '') {
@@ -54,6 +51,7 @@ export default function Comment () {
       });
     }
     setSend ('');
+    HandleShowComment ();
   };
   const getUserName = () => {
     Firebase.auth ().onAuthStateChanged (user => {
@@ -71,20 +69,12 @@ export default function Comment () {
       setComment (obj.reverse ());
     });
   };
-  const HandleReply = id => {
+  const HandleReply = item => {
     setModal (true);
-    const ref = Firebase.database ()
-      .ref ('Contentss')
-      .child (`Post/${route.params.postID}`)
-      .child (`comments/${id}`);
-
-    ref.once ('value', value => {
-      const values = value.val ();
-      setReply (values.user);
-      setCommentReply (values.comment);
-      setKeyID (values.keyID);
-    });
-    HandleShowReply (id);
+    setReply (item.user);
+    setCommentReply (item.comment);
+    setKeyID (item.keyID);
+    HandleShowReply (item.keyID);
   };
   const HandleLike = id => {
     const refData = Firebase.database ()
@@ -96,6 +86,7 @@ export default function Comment () {
       const numberPuls = number + 1;
       refData.update ({like: numberPuls});
     });
+    HandleShowComment ();
   };
   const HeaderReply = () => {
     return (
@@ -116,6 +107,7 @@ export default function Comment () {
     });
     setTextReply ('');
     HandleShowReply (keyID);
+    HandleShowComment ();
   };
   const HandleShowReply = keyID => {
     const ref = Firebase.database ()
@@ -125,7 +117,6 @@ export default function Comment () {
     ref.child ('reply').once ('value', value => {
       const values = value.val ();
       const obj = Object.values (values);
-      console.log (obj);
       setShowReply (obj.reverse ());
     });
   };
@@ -144,10 +135,10 @@ export default function Comment () {
               item={item}
               HandleReply={HandleReply}
               HandleLike={HandleLike}
-              showReply={showReply}
             />
           )}
-          keyExtractor={item => item.id}
+          keyExtractor={(item, index) => index}
+          inverted
         />
         <View style={styComment.play}>
           <TextInput
@@ -174,9 +165,11 @@ export default function Comment () {
         <View style={{height: '80%'}}>
           <FlatList
             style={{height: '69%', backgroundColor: '#808080'}}
-            ListHeaderComponent={HeaderReply}
+            ListFooterComponent={HeaderReply}
             data={showReply}
             renderItem={({item}) => <ItemReply item={item} />}
+            keyExtractor={item => item.id}
+            inverted
           />
           <View style={styComment.play1}>
             <TextInput
