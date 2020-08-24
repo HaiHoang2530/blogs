@@ -69,7 +69,7 @@ const styComment = StyleSheet.create ({
     alignItems: 'center',
   },
   styleReply: {
-    height:80,
+    flex:1,
     borderRadius: 20,
     backgroundColor: '#c8d5b9',
     margin: 8,
